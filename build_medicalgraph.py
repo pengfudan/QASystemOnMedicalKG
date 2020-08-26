@@ -6,7 +6,8 @@
 
 import os
 import json
-from py2neo import Graph,Node
+from py2neo import Graph, Node
+
 
 class MedicalGraph:
     def __init__(self):
@@ -15,8 +16,8 @@ class MedicalGraph:
         self.g = Graph(
             host="127.0.0.1",  # neo4j 搭载服务器的ip地址，ifconfig可获取到
             http_port=7474,  # neo4j 服务器监听的端口号
-            user="lhy",  # 数据库user name，如果没有更改过，应该是neo4j
-            password="lhy123")
+            user="neo4j",  # 数据库user name，如果没有更改过，应该是neo4j
+            password="linpeng")
 
     '''读取文件'''
     def read_nodes(self):
@@ -47,7 +48,7 @@ class MedicalGraph:
 
 
         count = 0
-        for data in open(self.data_path):
+        for data in open(self.data_path, encoding='utf-8'):
             disease_dict = {}
             count += 1
             print(count)
@@ -264,11 +265,9 @@ class MedicalGraph:
         return
 
 
-
 if __name__ == '__main__':
     handler = MedicalGraph()
     print("step1:导入图谱节点中")
     handler.create_graphnodes()
     print("step2:导入图谱边中")      
     handler.create_graphrels()
-    
